@@ -11,7 +11,9 @@ const Navbar = () => {
         signOut(auth).then(res => console.log(res)).catch(er => console.log(er))
     }
     const navitem = <>
-        <li><a>Submenu 1</a></li>
+   
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/jobs'>All Jobs</Link></li>
         <li><Link to='/myApplications'>MyApplications</Link></li>
         <li><Link to='/addjob'>Add Jobs</Link></li>
         <li><Link to='/mypostedJobs'>My Post</Link></li>

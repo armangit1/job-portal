@@ -13,7 +13,7 @@ const PrivetRoute2 = ({children}) => {
 if(!user){
     return children;
 }else{
-    return <Navigate to={"/"} ></Navigate>
+    return <Navigate to={"/"} replace ></Navigate>
 }
   
 };

@@ -9,7 +9,7 @@ const MyPostjob = () => {
     const {user} = useAuth();
 
     useEffect(()=>{
-    const unsabscraib = fetch(`http://localhost:5000/jobs?email=${user.email}`)
+    const unsabscraib = fetch(`https://job-portal-nu-seven-88.vercel.app/jobs?email=${user.email}`)
     .then(res=>res.json())
     .then(data=>setJobs(data))
     .catch(er=>{

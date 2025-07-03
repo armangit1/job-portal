@@ -11,6 +11,7 @@ import PrivetRoute2 from "./pages/PrivetRoute2";
 import AddJobs from "./pages/AddJobs";
 import MyPostjob from "./pages/MyPostjob";
 import View from "./pages/View";
+import Alljobs from "./pages/Alljobs";
 
 
 
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
 
             },
             {
+                path: "/jobs",
+                element: <Alljobs></Alljobs>
+
+            },
+            {
                 path: "/register",
                 element: <PrivetRoute2><Register></Register></PrivetRoute2> 
             },
@@ -36,7 +42,7 @@ const router = createBrowserRouter([
                 path:"/JobDetails/:id",
                 element:<PrivetRoute><JobDetails></JobDetails></PrivetRoute>,
                 loader: async ({params})=>{
-                    const jobdetails = await fetch(`http://localhost:5000/job/${params.id}`)
+                    const jobdetails = await fetch(`https://job-portal-nu-seven-88.vercel.app/job/${params.id}`)
                     return jobdetails.json();
                 }
             },
@@ -52,7 +58,7 @@ const router = createBrowserRouter([
                 path:`/viewJob/:id`,
                 element:<PrivetRoute><View></View></PrivetRoute>,
                 loader: async ({params})=>{
-                    const result = await fetch(`http://localhost:5000/applyed-job/${params.id}`)
+                    const result = await fetch(`https://job-portal-nu-seven-88.vercel.app/applyed-job/${params.id}`)
                     return result.json();
                 }
                 

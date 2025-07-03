@@ -20,8 +20,9 @@ const AddJobs = () => {
         const initialData = Object.fromEntries(formdata.entries())
         console.log(initialData)
 
-        const { min, max, currency, ...newJob } = initialData;
-
+        const { mins, maxs, currency, ...newJob } = initialData;
+        const min = parseInt(mins)
+        const max = parseInt(maxs)
         newJob.salaryRange = { min, max, currency }
         newJob.requirements = newJob.requirements.split('\n');
         newJob.responsibilities = newJob.responsibilities.split('\n');
@@ -29,7 +30,7 @@ const AddJobs = () => {
 
             console.log(newJob)
 
-        fetch('http://localhost:5000/jobs', {
+        fetch('https://job-portal-nu-seven-88.vercel.app/jobs', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -113,11 +114,11 @@ const AddJobs = () => {
                                             <div className="flex gap-2">
                                                 <div>
                                                     <label className="fieldset-label">Min</label>
-                                                    <input type="number" className="input" name="min" required placeholder="Min" />
+                                                    <input type="number" className="input" name="mins" required placeholder="Min" />
                                                 </div>
                                                 <div>
                                                     <label className="fieldset-label">Max</label>
-                                                    <input type="number" className="input" name="max" required placeholder="Max" />
+                                                    <input type="number" className="input" name="maxs" required placeholder="Max" />
                                                 </div>
                                                 <div>
                                                     <label className="fieldset-label">Currency</label>

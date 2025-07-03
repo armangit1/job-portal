@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const GoogleLoginButton = ({navigat}) => {
 
@@ -13,6 +14,7 @@ const GoogleLoginButton = ({navigat}) => {
     signinwhitegoogle().then(res=>{
       console.log(res)
       setLoding(false)
+     
       navi(navigat)
 
       

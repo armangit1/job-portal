@@ -1,18 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../Provider/useAuth';
+import useAxios from '../Provider/useAxios.jsx';
 
 const MyApplication = () => {
 
     const [application, setApplication] = useState([]);
+    const axiosSecure = useAxios();
 
     const { user } = useAuth();
 
+    const [loding , setLoding] = useState(true);
+
+    // fetch(`https://job-portal-nu-seven-88.vercel.app/applied-job?email=${user.email}`)
+    // .then(res => res.json())
+    // .then(data => setApplication(data))
+    // .catch(er => console.log(er))
 
     useEffect(() => {
-        const unsubscraib = fetch(`http://localhost:5000/applied-job?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setApplication(data))
-            .catch(er => console.log(er))
+        const unsubscraib = axiosSecure.get(`/applied-job?email=${user.email}`)
+        .then(res =>{
+            setApplication(res.data)
+            setLoding(false)
+        })
 
         return () => { unsubscraib }
     }, [user.email])
@@ -20,7 +29,7 @@ const MyApplication = () => {
 
     const handleDelete = id =>{
 
-        fetch(`http://localhost:5000/application/${id}`,
+        fetch(`https://job-portal-nu-seven-88.vercel.app/application/${id}`,
             {
             method:'delete'
         })
@@ -34,6 +43,12 @@ const MyApplication = () => {
 
     }
 
+
+if(loding){
+    return <div className='flex justify-center' > <span className="loading loading-spinner text-center text-info"></span></div>
+   
+    
+}
     if(application.length<=0){
         return <div className='content-center'>
      <h1 className='text-center'>No Data Fund!</h1>

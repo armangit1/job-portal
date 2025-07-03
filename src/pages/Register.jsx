@@ -2,13 +2,17 @@ import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import Animation from '../assets/Register-anim/register-anim.json'
 import AuthContext from '../Context/AuthContext';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import GoogleLoginButton from '../Context/GoogleLoginButton';
+import axios from 'axios';
+
+
+
 
 const Register = () => {
 
     const { createuser } = useContext(AuthContext);
- 
+
     const [error, SetError] = useState('');
     const handleRegister = e => {
         e.preventDefault();
@@ -43,7 +47,7 @@ const Register = () => {
         createuser(email, password)
             .then(res => {
                 console.log(res);
-           
+
             })
             .catch(er => {
                 console.log(er);
@@ -81,7 +85,7 @@ const Register = () => {
 
                             </form>
                             <p className=''>Already have an account! <Link to='/login' className='text-stone-950'>Please Login</Link></p>
-                           <GoogleLoginButton ></GoogleLoginButton>
+                            <GoogleLoginButton ></GoogleLoginButton>
                         </div>
                     </div>
                 </div>

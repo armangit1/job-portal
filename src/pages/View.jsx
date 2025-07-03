@@ -10,7 +10,7 @@ console.log(data);
 
         const data = {status:e.target.value}
 
-        fetch(`http://localhost:5000/application/${id}`,{
+        fetch(`https://job-portal-nu-seven-88.vercel.app/application/${id}`,{
             method:'PUT',
             headers:{
                 'content-type':'application/json'
