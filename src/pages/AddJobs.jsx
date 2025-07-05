@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import useAuth from './../Provider/useAuth';
 import Swal from 'sweetalert2'
 import axios from 'axios';
-import { Helmet } from 'react-helmet-async';
+
 
 const AddJobs = () => {
 
