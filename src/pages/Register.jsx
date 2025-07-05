@@ -1,5 +1,5 @@
 import Lottie from 'lottie-react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Animation from '../assets/Register-anim/register-anim.json'
 import AuthContext from '../Context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -53,6 +53,12 @@ const Register = () => {
         setError(err.message);
       });
   };
+
+  useEffect(()=>{
+           document.title = "Register | Job Portal"
+      },[])
+
+
     return (
         <div className='min-h-[calc(100vh-295px)] content-center'>
             <h1 className='text-2xl text-red-400 text-center'>{error}</h1>
@@ -61,7 +67,7 @@ const Register = () => {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <h1 className="text-4xl font-bold">Register now!</h1>
-                        <div className='w-96'>
+                        <div className='w-96 hidden lg:block'>
                             <Lottie animationData={Animation}></Lottie>
                         </div>
                     </div>

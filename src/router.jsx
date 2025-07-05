@@ -13,6 +13,7 @@ import MyPostjob from "./pages/MyPostjob";
 import View from "./pages/View";
 import Alljobs from "./pages/Alljobs";
 import axios from "axios";
+import Notfund from "./pages/Notfund";
 
 
 
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <Mainlayout></Mainlayout>,
-        errorElement: <h2>Error this page not fund</h2>,
+        errorElement: <Notfund></Notfund>,
         children: [
             {
                 path: "/",

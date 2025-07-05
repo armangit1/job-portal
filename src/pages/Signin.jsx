@@ -1,5 +1,5 @@
 import Lottie, { useLottie } from 'lottie-react';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Animation from '../assets/Register-anim/register-anim.json'
 import AuthContext from '../Context/AuthContext';
@@ -52,6 +52,10 @@ const Signin = () => {
             })
 
     }
+
+    useEffect(()=>{
+         document.title = "Login | Job Portal"
+    },[])
     return (
         <div className='min-h-[calc(100vh-295px)] content-center'>
             <h1 className='text-2xl text-red-400 text-center'>{error}</h1>
@@ -59,7 +63,7 @@ const Signin = () => {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <h1 className="text-4xl font-bold">Login now!</h1>
-                        <div className='w-96'>
+                        <div className='w-96 hidden lg:block'>
                             <Lottie animationData={Animation}></Lottie>
                         </div>
                     </div>

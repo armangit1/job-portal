@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../Provider/useAuth';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const MyPostjob = () => {
 
@@ -14,6 +15,7 @@ const MyPostjob = () => {
     const [company_logo, title, _id] = jobs;
 
     useEffect(() => {
+         document.title = "My Posts | Job Portal"
         const fetchJobs = async () => {
             try {
                 setLoding(true);
@@ -63,9 +65,10 @@ const MyPostjob = () => {
     return (
         <div>
 
+      
 
-
-            {
+        <div>
+               {
                 jobs && jobs.length > 0 ? (
                     <div className="overflow-x-auto">
                         <table className="table">
@@ -117,6 +120,9 @@ const MyPostjob = () => {
                         </table>
                     </div>) : (<h1 className='text-center'>Data Is Not Fund</h1>)
             }
+            
+            </div> 
+            
 
 
         </div>

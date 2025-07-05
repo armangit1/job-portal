@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../Provider/useAuth';
 import useAxios from '../Provider/useAxios.jsx';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const MyApplication = () => {
 
@@ -17,7 +18,10 @@ const MyApplication = () => {
     // .then(data => setApplication(data))
     // .catch(er => console.log(er))
 
+     
+
     useEffect(() => {
+          document.title = "My Applications | Job Portal"
         const unsubscraib = axiosSecure.get(`/applied-job?email=${user.email}`)
         .then(res =>{
             setApplication(res.data)
@@ -59,6 +63,9 @@ if(loding){
 
     return (
         <div>
+
+          
+
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}

@@ -1,11 +1,12 @@
 import Lottie from 'lottie-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import applyjob from '../assets/Register-anim/applyjob.json'
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from './../Provider/useAuth';
 import Swal from 'sweetalert2'
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 const AddJobs = () => {
 
@@ -57,9 +58,15 @@ const AddJobs = () => {
             });
     };
 
+    useEffect(()=>{
+document.title = "Post Job | Job Portal"
+    },[])
+
 
     return (
         <div>
+
+              
             <div className='min-h-[calc(100vh-295px)] content-center'>
 
                 <div className='my-2'>

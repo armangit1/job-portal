@@ -3,6 +3,8 @@ import JobCard from '../components/JobCard';
 import axios from 'axios';
 import Card from '../components/Card';
 
+
+
 const Alljobs = () => {
     const [jobs, setJobs] = useState([]);
 
@@ -15,8 +17,10 @@ const Alljobs = () => {
 
     useEffect(() => {
 
+        document.title= "Home | Job Portal "
+
         setLoading(true);
-     
+
         const params = {};
         if (search) params.search = search;
         if (minsalary !== undefined && minsalary !== "") params.min = minsalary;
@@ -44,12 +48,13 @@ const Alljobs = () => {
     };
 
 
+     
 
 
     return (
         <div>
 
-
+ 
             <div className='bg-base-200 p-4 flex flex-wrap gap-4 items-center justify-center'>
                 <input
                     onChange={(e) => handleSearch(e.target.value)}
@@ -74,9 +79,9 @@ const Alljobs = () => {
 
 
 
-            <div className={`grid-cols-1 ${loading?"":"grid"} sm:grid-cols-2 lg:grid-cols-4 p-3 gap-4 mt-6`}>
+            <div className={`grid-cols-1 ${loading ? "" : "grid"} sm:grid-cols-2 lg:grid-cols-4 p-3 gap-4 mt-6`}>
                 {
-                  loading?(<div className='flex justify-center' > <span className="loading loading-spinner text-center text-info"></span></div>):  (jobs.length > 0 ? jobs.map(job => (
+                    loading ? (<div className='flex justify-center' > <span className="loading loading-spinner text-center text-info"></span></div>) : (jobs.length > 0 ? jobs.map(job => (
                         <Card key={job._id} job={job} />
                     )) : (
                         <p className="text-center col-span-full text-lg text-gray-500">No jobs found.</p>
