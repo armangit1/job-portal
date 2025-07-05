@@ -2,7 +2,7 @@ import Lottie from 'lottie-react';
 import React, { useContext, useState } from 'react';
 import Animation from '../assets/Register-anim/register-anim.json'
 import AuthContext from '../Context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import GoogleLoginButton from '../Context/GoogleLoginButton';
 import axios from 'axios';
 
@@ -10,50 +10,49 @@ import axios from 'axios';
 
 
 const Register = () => {
+  const { createuser } = useContext(AuthContext);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
-    const { createuser } = useContext(AuthContext);
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const password = form.password.value;
 
-    const [error, SetError] = useState('');
-    const handleRegister = e => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        const user = { name, email, password }
-        SetError('');
-        console.log(user);
-        const regex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
-        if (regex.test(password)) {
-            console.log('password is ok')
-        } else {
-            SetError('Make Stong Password!')
-            return
-        }
-        if (name) {
-            console.log('neme is ok');
-        } else {
-            SetError('Set a Name')
-            return
-        }
-        if (email) {
-            console.log('neme is ok');
-        } else {
-            SetError('Set a Email')
-            return;
-        }
-        SetError('User Create Successfully!')
+    setError('');
+    setSuccess('');
 
-        createuser(email, password)
-            .then(res => {
-                console.log(res);
-
-            })
-            .catch(er => {
-                console.log(er);
-            })
+    if (!name) {
+      setError('Please provide a name.');
+      return;
     }
 
+    if (!email) {
+      setError('Please provide an email.');
+      return;
+    }
+
+    if (!password || password.length < 6) {
+      setError('Password must be at least 6 characters.');
+      return;
+    }
+
+    createuser(email, password)
+      .then((res) => {
+        console.log('User created:', res.user);
+        setSuccess('User created successfully!');
+
+        form.reset();
+        navigate('/')
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err.message);
+      });
+  };
     return (
         <div className='min-h-[calc(100vh-295px)] content-center'>
             <h1 className='text-2xl text-red-400 text-center'>{error}</h1>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../Provider/useAuth';
 import useAxios from '../Provider/useAxios.jsx';
+import axios from 'axios';
 
 const MyApplication = () => {
 
@@ -29,9 +30,9 @@ const MyApplication = () => {
 
     const handleDelete = id =>{
 
-        fetch(`https://job-portal-nu-seven-88.vercel.app/application/${id}`,
+        axios.delete(`https://job-portal-nu-seven-88.vercel.app/application/${id}?email=${user.email}`,
             {
-            method:'delete'
+           withCredentials:true
         })
         .then(res=>{
           const  newapplication =  application.filter(appl=>appl._id != id);
@@ -64,10 +65,11 @@ if(loding){
                     <thead>
                         <tr>
                           
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
-                            <th></th>
+                            <th>Company</th>
+                            <th>Location</th>
+                            
+                            <th>State</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,16 +89,13 @@ if(loding){
                                             </div>
                                             <div>
                                                 <div className="font-bold">{appli.title}</div>
-                                                <div className="text-sm opacity-50">{appli.location}</div>
+                                                <div className="text-sm opacity-50">{appli.company_name}</div>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                        Zemlak, Daniel and Leannon
-                                        <br />
-                                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                                    </td>
-                                    <td>Purple</td>
+                                   
+                                    <td>{appli?.location}</td>
+                                    <td>{appli?.status?.status}</td>
                                     <th>
                                         <button onClick={()=>handleDelete(appli._id)} className="btn btn-active btn-xs">Delete</button>
                                     </th>

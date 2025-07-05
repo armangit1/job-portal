@@ -1,8 +1,13 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../Context/AuthContext';
 import { signOut } from 'firebase/auth';
 import auth from '../firebase';
+import { IoAddCircleSharp } from "react-icons/io5";
+import { IoMdLogOut } from "react-icons/io";
+import { CiLogin } from "react-icons/ci";
+
+
 
 const Navbar = () => {
     const { user, loding } = useContext(AuthContext);
@@ -12,16 +17,19 @@ const Navbar = () => {
     }
     const navitem = <>
    
-        <li><Link to='/'>Home</Link></li>
-        <li><Link to='/jobs'>All Jobs</Link></li>
-        <li><Link to='/myApplications'>MyApplications</Link></li>
-        <li><Link to='/addjob'>Add Jobs</Link></li>
-        <li><Link to='/mypostedJobs'>My Post</Link></li>
+        <li><NavLink to='/'>Home</NavLink></li>
+       
+        <li><NavLink to='/myApplications'> My Applications</NavLink></li>
+       
+        <li><NavLink to='/mypostedJobs'>My Post</NavLink></li>
+         <button className=' md:ml-2'><NavLink to='/addjob' className=' inline-flex items-center text-green-500'><IoAddCircleSharp className='text-xl m-1'></IoAddCircleSharp> POST A JOB</NavLink></button>
 
     </>
     return (
 
-        <div className="navbar bg-base-100 ">
+        
+      <div className='max-w-[1500px] mx-auto bg-white'>
+          <div className="navbar  ">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -33,7 +41,7 @@ const Navbar = () => {
                         {navitem}
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost text-xl">daisyUI</Link >
+                <Link to="/" className="btn btn-ghost text-2xl text-pink-500 font-bold">Job Portal</Link >
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -41,12 +49,14 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
+                
+          
 
                 {
                     loding ? <><button className='btn bg-blue-300'><span className="loading loading-spinner text-info"></span></button></> : user ? (
-                        <button onClick={logout} className='btn bg-blue-300'>Log out</button>
+                        <button onClick={logout} className='btn bg-blue-700 text-white border-0'><IoMdLogOut />Log out</button>
                     ) : (
-                        <Link to="/register" className="btn bg-blue-500 text-white">Sign In</Link>
+                        <Link to="/register" className="btn bg-blue-500 border-0 text-white"><CiLogin />Sign In</Link>
                     )
                 }
 
@@ -54,6 +64,7 @@ const Navbar = () => {
             </div>
 
         </div>
+      </div>
     );
 };
 

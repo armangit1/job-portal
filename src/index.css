@@ -1,3 +1,29 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@plugin "daisyui" {
+themes: light --default;
+}
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active{
+    color: blueviolet;
+}
+
+html{
+  background-color: #F2F4F7;
+}
+
+li{
+  color: #000;
+  
+}
 

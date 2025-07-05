@@ -12,6 +12,9 @@ import AddJobs from "./pages/AddJobs";
 import MyPostjob from "./pages/MyPostjob";
 import View from "./pages/View";
 import Alljobs from "./pages/Alljobs";
+import axios from "axios";
+
+
 
 
 
@@ -26,51 +29,47 @@ const router = createBrowserRouter([
                 element: <Home></Home>
 
             },
+
             {
-                path: "/jobs",
-                element: <Alljobs></Alljobs>
+                path: "/register",
+                element: <PrivetRoute2><Register></Register></PrivetRoute2>
+            },
+            {
+                path: "/login",
+                element: <PrivetRoute2><Signin></Signin></PrivetRoute2>
+            }, {
+                path: "/JobDetails/:id",
+                element: <PrivetRoute><JobDetails></JobDetails></PrivetRoute>,
+                loader: async ({ params }) => {
+                    const response = await axios.get(`https://job-portal-nu-seven-88.vercel.app/job/${params.id}`, {
+                        withCredentials: true,
+                    });
+                    return response.data; // ✅ এটা ঠিক
+                }
+            },
+            {
+                path: "/apply-job/:id",
+                element: <PrivetRoute><ApplyJob></ApplyJob></PrivetRoute>
+            },
+            {
+                path: "/mypostedJobs",
+                element: <PrivetRoute><MyPostjob></MyPostjob></PrivetRoute>
+            },
+            {
+                path: `/viewJob/:id`,
+                element: <PrivetRoute><View></View></PrivetRoute>,
+            
 
             },
             {
-                path: "/register",
-                element: <PrivetRoute2><Register></Register></PrivetRoute2> 
-            },
-            {
-                path:"/login",
-                element:<PrivetRoute2><Signin></Signin></PrivetRoute2>
-            },{
-                path:"/JobDetails/:id",
-                element:<PrivetRoute><JobDetails></JobDetails></PrivetRoute>,
-                loader: async ({params})=>{
-                    const jobdetails = await fetch(`https://job-portal-nu-seven-88.vercel.app/job/${params.id}`)
-                    return jobdetails.json();
-                }
-            },
-            {
-                path:"/apply-job/:id",
-                element:<PrivetRoute><ApplyJob></ApplyJob></PrivetRoute>
-            },
-            {
-                path:"/mypostedJobs",
-                element:<PrivetRoute><MyPostjob></MyPostjob></PrivetRoute>
-            },
-            {
-                path:`/viewJob/:id`,
-                element:<PrivetRoute><View></View></PrivetRoute>,
-                loader: async ({params})=>{
-                    const result = await fetch(`https://job-portal-nu-seven-88.vercel.app/applyed-job/${params.id}`)
-                    return result.json();
-                }
-                
-            },
-            {
-                path:'/myApplications',
-                element:<PrivetRoute><MyApplication></MyApplication></PrivetRoute>
-            },{
-                path:'/addjob',
-                element:<PrivetRoute><AddJobs></AddJobs></PrivetRoute>
+                path: '/myApplications',
+                element: <PrivetRoute><MyApplication></MyApplication></PrivetRoute>
+            }, {
+                path: '/addjob',
+                element: <PrivetRoute><AddJobs></AddJobs></PrivetRoute>
             }
         ]
-    }
+    },
+
 ])
 export default router;

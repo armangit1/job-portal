@@ -12,11 +12,12 @@ const ApplyJob = () => {
 
     const navigate = useNavigate();
 
-    console.log(user,id)
+    console.log(user, id)
 
     const handleApply = e => {
         e.preventDefault();
         const form = e.target;
+        const name = form.name.value;
         const linkdin = form.linkdin.value;
         const github = form.github.value;
         const resume = form.resume.value;
@@ -28,27 +29,31 @@ const ApplyJob = () => {
             return;
         }
 
+
+
         const jobapplication = {
-            job_id : id,
-            applicant_email : user.email,
+            job_id: id,
+            name,
+            applicant_email: user.email,
             linkdin,
             github,
-            resume
+            resume,
+            state: "panding"
         }
 
         console.log(jobapplication)
 
-        fetch('https://job-portal-nu-seven-88.vercel.app/job-application',{
-            method:'post',
-            headers:{
-                'content-type':'application/json'
+        fetch('https://job-portal-nu-seven-88.vercel.app/job-application', {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
             },
-            body:JSON.stringify(jobapplication)
+            body: JSON.stringify(jobapplication)
 
-        }).then(res=>{
+        }).then(res => {
             console.log(res)
             navigate('/myApplications')
-        }).catch(er=>{
+        }).catch(er => {
             console.log(er)
         })
 
@@ -71,6 +76,8 @@ const ApplyJob = () => {
 
 
                                 <fieldset className="fieldset">
+                                    <label className="fieldset-label">Name</label>
+                                    <input type="text" className="input" name='name' required placeholder="Enter Name" />
                                     <label className="fieldset-label">Linkd IN Url</label>
                                     <input type="url" className="input" name='linkdin' required placeholder="Linkd IN Url" />
                                     <label className="fieldset-label">Github Url</label>
@@ -78,15 +85,24 @@ const ApplyJob = () => {
                                     <label className="fieldset-label">Resume Url</label>
                                     <input type="url" className="input" required name='resume' placeholder="Resume Url" />
 
-                                    <label className="fieldset-label">
-                                        <input type="checkbox" name='checkbox' className="checkbox" />
-                                        Remember me
-                                    </label>
+                                    <div className="flex items-center gap-2">
+                                        <input
+                                            type="checkbox"
+                                            name="checkbox"
+                                            id="policy"
+                                            className="checkbox"
+                                            required
+                                        />
+                                        <label htmlFor="policy" className="text-sm text-gray-700">
+                                            Accept Privacy Policy
+                                        </label>
+                                    </div>
+
                                     <button className="btn btn-neutral mt-4">Apply</button>
 
                                 </fieldset>
                             </form>
-                            <p> No Account?<Link to='/register'> Create one!</Link></p>
+                          
 
                         </div>
                     </div>
