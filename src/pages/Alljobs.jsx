@@ -11,8 +11,12 @@ const Alljobs = () => {
     const [maxsalary, setMaxSalary] = useState();
     const [loading, setLoading] = useState(false);
 
+
+
     useEffect(() => {
+
         setLoading(true);
+     
         const params = {};
         if (search) params.search = search;
         if (minsalary !== undefined && minsalary !== "") params.min = minsalary;
@@ -39,10 +43,6 @@ const Alljobs = () => {
         setMaxSalary(value ? parseInt(value) : undefined);
     };
 
-
-    if (loading) {
-        return (<div className='flex justify-center' > <span className="loading loading-spinner text-center text-info"></span></div>)
-    }
 
 
 
@@ -74,13 +74,13 @@ const Alljobs = () => {
 
 
 
-            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 p-3 gap-4 mt-6'>
+            <div className={`grid-cols-1 ${loading?"":"grid"} sm:grid-cols-2 lg:grid-cols-4 p-3 gap-4 mt-6`}>
                 {
-                    jobs.length > 0 ? jobs.map(job => (
+                  loading?(<div className='flex justify-center' > <span className="loading loading-spinner text-center text-info"></span></div>):  (jobs.length > 0 ? jobs.map(job => (
                         <Card key={job._id} job={job} />
                     )) : (
                         <p className="text-center col-span-full text-lg text-gray-500">No jobs found.</p>
-                    )
+                    ))
                 }
             </div>
         </div>
